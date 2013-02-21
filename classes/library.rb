@@ -1,4 +1,6 @@
 class Library
+  attr_accessor :current_user, :users, :available_books
+
   def init
     
   end
@@ -7,8 +9,8 @@ class Library
     
   end
 
-  def login
-    
+  def login(username, password)
+    @current_user = username
   end
 
   def check_in(book)
