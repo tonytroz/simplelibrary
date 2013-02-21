@@ -8,10 +8,11 @@ require "./classes/library"
 
 # Print user commmands
 def usage
-  puts "==========================================="
-  puts "== Commands:                             =="
-  puts "== checkin checkout lend limit quit help =="
-  puts "==========================================="
+  puts "=================================================="
+  puts "== Commands:                                    =="
+  puts "=================================================="
+  puts "== checkin checkout lend limit quit help        =="
+  puts "=================================================="
 end
 
 # Create library instance
@@ -29,7 +30,9 @@ password = gets.chomp
 user = library.login(username, password)
 # Check for valid user
 if user.nil?
-  puts "ERROR: Invalid Login."
+  puts "=================================================="
+  puts "== ERROR: Invalid login                         =="
+  puts "=================================================="
   exit 1
 end
 usage()
@@ -47,9 +50,13 @@ while(user_input != "quit")
       end
       user_input_book = gets.chomp
       if library.checkin(user_input_book)
-        puts "SUCCESS: Book checked in."
+        puts "=================================================="
+        puts "== SUCCESS: Book checked in                     =="
+        puts "=================================================="
       else
-        puts "ERROR: Book not found."
+        puts "=================================================="
+        puts "== ERROR: Book not found                        =="
+        puts "=================================================="
       end
     when "checkout"
       puts "================================================="
@@ -60,11 +67,16 @@ while(user_input != "quit")
       end
       user_input_book = gets.chomp
       if library.checkout(user_input_book)
-        puts "SUCCESS: Book checked out."
+        puts "=================================================="
+        puts "== SUCCESS: Book checked out                    =="
+        puts "=================================================="
       else
-        puts "ERROR: Book not found."
+        puts "=================================================="
+        puts "== ERROR: Book not found                        =="
+        puts "=================================================="
       end
     when "lend"
+      # Verify user has not hit lend limit.
       puts "================================================="
       puts "== Choose a Book to Lend by ISBN:              =="
       puts "================================================="
@@ -72,16 +84,49 @@ while(user_input != "quit")
         puts b.isbn
       end
       user_input_book = gets.chomp
-      library.lend()
+      puts "================================================="
+      puts "== Choose a Book to Lend by Username:          =="
+      puts "================================================="
+      library.users.each do |u|
+        puts u.username
+      end
+      user_input_user = gets.chomp
+      if library.lend(user_input_user, user_input_book)
+      if library.checkout(user_input_book)
+        puts "=================================================="
+        puts "== SUCCESS: Book lent to user                   =="
+        puts "=================================================="
+      else
+        puts "=================================================="
+        puts "== ERROR: Book/User not found                   =="
+        puts "=================================================="
+      end
     when "limit"
-      library.limit()
+      puts "================================================="
+      puts "== Choose a Book to Lend by Username:          =="
+      puts "================================================="
+      user_input_limit = gets.chomp
+      if library.limit(user_input_limit)
+        puts "=================================================="
+        puts "== SUCCESS: Limit changed                       =="
+        puts "=================================================="
+      else
+        puts "=================================================="
+        puts "== ERROR: Limit invalid                         =="
+        puts "=================================================="
+      end
     when "quit"
+      puts "================================================="
+      puts "== Saving and exiting application.             =="
+      puts "================================================="
       library.save()
       exit 0
     when "help"
       usage()
     else
-      puts "ERROR: Invalid command."
-      usage()
+        puts "=================================================="
+        puts "== ERROR: Limit command                         =="
+        puts "=================================================="
+        usage()
     end
 end

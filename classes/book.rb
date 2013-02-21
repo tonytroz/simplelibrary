@@ -1,6 +1,7 @@
 class Book
   attr_accessor :isbn, :name, :author, :availability, :format, :genre, :language
 
+  # Initializes book values
   def initialize(isbn, name, author, availability, format, genre, language)
     @isbn = isbn
     @name = name

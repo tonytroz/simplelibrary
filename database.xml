@@ -1,3 +1,4 @@
+<-- simplelibrary Application Storage -->
 <books>
   <book isbn="1" format="hardcopy" genre="fiction" language="english">
     <name></name>
