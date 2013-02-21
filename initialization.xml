@@ -1,0 +1,12 @@
+<books>
+  <book>
+    <name></name>
+  </book>
+</books>
+<users>
+  <user>
+    <id>1</id>
+    <username></username>
+    <password></password>
+  </user>
+</users>
