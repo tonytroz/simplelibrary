@@ -33,7 +33,6 @@ username = gets.chomp
 print_screen("Enter Password:")
 password = gets.chomp
 user = library.login(username, password)
-puts user
 # Check for valid user
 if user.nil?
   print_screen("ERROR: Invalid login")

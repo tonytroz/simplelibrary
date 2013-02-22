@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe User do
   before :each do
-    @user = User.new("username", "password", "lendlimit")
+    @user = User.new("username", "password", 1)
+    @found_user = User.find_by_username("username")
+    @not_found_user = User.find_by_username("xxx")
   end
 
   describe "#new" do
@@ -23,7 +25,7 @@ describe User do
   end
   describe "#lendlimit" do
     it "returns correct lendlimit" do
-      @user.lendlimit.should == "lendlimit"
+      @user.lendlimit.should == 1
     end
   end
   describe "#books" do
@@ -32,13 +34,13 @@ describe User do
     end
   end
 
-  describe "#found_by_username" do
-    it "returns user when username exists"
-      User.find_by_username("username").should be_an_instance_of User
+  describe "#find_by_username" do
+    it "returns user when username exists" do
+      @found_user.should be_an_instance_of User
     end
 
-    it "returns nil when username doesn't exist"
-      User.find_by_username("xxxxx").should be_nil
+    it "returns nil when username doesn't exist" do
+      @not_found_user.should be_nil
     end
   end
 end
