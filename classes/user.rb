@@ -1,10 +1,10 @@
 class User
-    attr_accessor :username, :password, :books
+  attr_accessor :username, :password, :books
 
   # Initializes book values
-  def initialize(username, password, books)
+  def initialize(username, password)
     @username = username
     @password = password
-    @books = books
+    @books = []
   end
 end

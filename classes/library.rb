@@ -2,7 +2,8 @@ class Library
   attr_accessor :current_user, :users, :available_books
 
   # Reads database file and populate users and available books
-  def init
+  def initialize
+    @available_books = []
   end
 
   # Serializes users and available books to database file

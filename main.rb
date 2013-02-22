@@ -2,11 +2,20 @@
 # Created by Tony Trozzo <tonytroz@gmail.com>
 # 02/21/2013
 
-require "./classes/book"
-require "./classes/user"
-require "./classes/library"
+require_relative "./classes/book"
+require_relative "./classes/user"
+require_relative "./classes/library"
+require "yaml"
 
-# Print user commmands
+# Formats user reponses and prints to screen
+# Text must be less than 45 characters
+def print_screen(text)
+  puts "=================================================="
+  puts "== " + text + " " * (44-text.length) + " =="
+  puts "=================================================="
+end
+
+# Prints user commmands
 def usage
   puts "=================================================="
   puts "== Commands:                                    =="
@@ -17,22 +26,15 @@ end
 
 # Create library instance
 library = Library.new
-puts "=================================================="
-puts "== Welcome to the Simple Library Account System =="
-puts "=================================================="
-puts "== Enter Username:                              =="
-puts "=================================================="
+print_screen("Welcome to the Simple Library Account System")
+print_screen("Enter Username:")
 username = gets.chomp
-puts "=================================================="
-puts "== Enter Password:                              =="
-puts "=================================================="
+print_screen("Enter Password:")
 password = gets.chomp
 user = library.login(username, password)
 # Check for valid user
 if user.nil?
-  puts "=================================================="
-  puts "== ERROR: Invalid login                         =="
-  puts "=================================================="
+  print_screen("ERROR: Invalid login")
   exit 1
 end
 usage()
@@ -42,91 +44,60 @@ while(user_input != "quit")
     user_input_menu = gets.chomp
     case user_input_menu
     when "checkin"
-      puts "================================================="
-      puts "== Choose a Book to Check In by ISBN:          =="
-      puts "================================================="
+      print_screen("Choose a Book to Check In by ISBN:")
       user.books.each do |b|
         puts b.isbn
       end
       user_input_book = gets.chomp
       if library.checkin(user_input_book)
-        puts "=================================================="
-        puts "== SUCCESS: Book checked in                     =="
-        puts "=================================================="
+        print_screen("SUCCESS: Book checked in")
       else
-        puts "=================================================="
-        puts "== ERROR: Book not found                        =="
-        puts "=================================================="
+        print_screen("ERROR: Book not found")
       end
     when "checkout"
-      puts "================================================="
-      puts "== Choose a Book to Check Out by ISBN:         =="
-      puts "================================================="
+      print_screen("Choose a Book to Check Out by ISBN:")
       library.available_books.each do |b|
-        puts b.isbn + "|" b.author + "|" b.name
+        puts b.isbn + "|" + b.author + "|" + b.name
       end
       user_input_book = gets.chomp
       if library.checkout(user_input_book)
-        puts "=================================================="
-        puts "== SUCCESS: Book checked out                    =="
-        puts "=================================================="
+        print_screen("SUCCESS: Book checked out")
       else
-        puts "=================================================="
-        puts "== ERROR: Book not found                        =="
-        puts "=================================================="
+        print_screen("ERROR: Book not found")
       end
     when "lend"
       # Verify user has not hit lend limit.
-      puts "================================================="
-      puts "== Choose a Book to Lend by ISBN:              =="
-      puts "================================================="
+      print_screen("Choose a Book to Lend by ISBN:")
       user.books.each do |b|
         puts b.isbn
       end
       user_input_book = gets.chomp
-      puts "================================================="
-      puts "== Choose a Book to Lend by Username:          =="
-      puts "================================================="
+      print_screen("Choose a Book to Lend by Username:")
       library.users.each do |u|
         puts u.username
       end
       user_input_user = gets.chomp
       if library.lend(user_input_user, user_input_book)
-      if library.checkout(user_input_book)
-        puts "=================================================="
-        puts "== SUCCESS: Book lent to user                   =="
-        puts "=================================================="
+        print_screen("SUCCESS: Book lent to user")
       else
-        puts "=================================================="
-        puts "== ERROR: Book/User not found                   =="
-        puts "=================================================="
+        print_screen("ERROR: Book/User not found")
       end
     when "limit"
-      puts "================================================="
-      puts "== Choose a Book to Lend by Username:          =="
-      puts "================================================="
+      print_screen("Choose a Book to Lend by Username:")
       user_input_limit = gets.chomp
       if library.limit(user_input_limit)
-        puts "=================================================="
-        puts "== SUCCESS: Limit changed                       =="
-        puts "=================================================="
+        print_screen("SUCCESS: Limit changed")
       else
-        puts "=================================================="
-        puts "== ERROR: Limit invalid                         =="
-        puts "=================================================="
+        print_screen("ERROR: Limit invalid")
       end
     when "quit"
-      puts "================================================="
-      puts "== Saving and exiting application.             =="
-      puts "================================================="
+      print_screen("Saving and exiting application")
       library.save()
       exit 0
     when "help"
       usage()
-    else
-        puts "=================================================="
-        puts "== ERROR: Limit command                         =="
-        puts "=================================================="
-        usage()
+    else      
+      print_screen("ERROR: Command invalid")
+      usage()
     end
 end
