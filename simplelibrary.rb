@@ -27,6 +27,7 @@ end
 # Create library instance
 library = Library.new
 print_screen("Welcome to the Simple Library Account System")
+# User login
 print_screen("Enter Username:")
 username = gets.chomp
 print_screen("Enter Password:")
@@ -44,6 +45,7 @@ user_input = nil
 while(user_input != "quit")
     user_input_menu = gets.chomp
     case user_input_menu
+    # Allows user to check in books
     when "checkin"
       print_screen("Choose a Book to Check In by ISBN:")
       user.books.each do |b|
@@ -55,6 +57,7 @@ while(user_input != "quit")
       else
         print_screen("ERROR: Book not found")
       end
+    # Allows user to check out books
     when "checkout"
       print_screen("Choose a Book to Check Out by ISBN:")
       library.available_books.each do |b|
@@ -62,6 +65,7 @@ while(user_input != "quit")
       end
       user_input_book = gets.chomp
       print_screen(library.check_out(user_input_book))
+    # Allows user to lend a book to another user
     when "lend"
       print_screen("Choose a Book to Lend by ISBN:")
       user.books.each do |b|
@@ -74,6 +78,7 @@ while(user_input != "quit")
       end
       user_input_user = gets.chomp
       print_screen(library.lend(user_input_user, user_input_book))
+    # Allows user to change max number of lends
     when "limit"
       print_screen("Choose a limit for number of lends:")
       user_input_limit = gets.chomp
@@ -82,10 +87,12 @@ while(user_input != "quit")
       else
         print_screen("ERROR: Limit invalid")
       end
+    # Saves and exits application
     when "quit"
       print_screen("Saving and exiting application")
       library.save()
       exit 0
+    # Prints usage
     when "help"
       usage()
     else      

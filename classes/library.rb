@@ -59,10 +59,19 @@ class Library
     if @current_user.books.length == @checkout_limit
       return "ERROR: Checkout limit reached"
     end
+    # Verify user doesn't already have book
     found = nil
-    available_books.each do |b|
+    @current_user.books.each do |b|
       if b.isbn == isbn
         found = current_user.books.index(b)
+      end
+    end
+    unless found.nil?
+      return "ERROR: Book already checked out."
+    end
+    available_books.each do |b|
+      if b.isbn == isbn
+        found = available_books.index(b)
       end
     end
     if found.nil?
