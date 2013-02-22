@@ -35,7 +35,7 @@ class Library
   # Checks book in to available books
   def check_in(isbn)
     found = nil
-    current_user.books.each do |b|
+    @current_user.books.each do |b|
       if b.isbn == isbn
         found = current_user.books.index(b)
       end
@@ -43,11 +43,11 @@ class Library
     if found.nil?
        return nil
     else
-      current_user.books.delete(found)
+      @current_user.books.delete(found)
        if @available_books.include?(found)
-         available_books.index(found).availability += 1
+         @available_books.index(found).availability += 1
        else
-         available_books.push(found)
+         @available_books.push(found)
        end
        return true
     end
@@ -69,19 +69,19 @@ class Library
     unless found.nil?
       return "ERROR: Book already checked out."
     end
-    available_books.each do |b|
+    @available_books.each do |b|
       if b.isbn == isbn
-        found = available_books.index(b)
+        found = @available_books.index(b)
       end
     end
     if found.nil?
       return "ERROR: Book not found"
     else
       @current_user.books.push(found)
-      if available_books.index(found).availability == 1
-        available_books.delete(found)
+      if @available_books.index(found).availability == 1
+        @available_books.delete(found)
       else
-        available_books.index(found).availability -= 1
+        @available_books.index(found).availability -= 1
       end
       return "SUCCESS: Book checked out"
     end
@@ -116,8 +116,8 @@ class Library
 
   # Changes current user's lend limit
   def change_lend_limit(limit)
-    if limit > 0
-      @current_user.lendlimit = limit
+    if limit.to_i > 0
+      @current_user.lendlimit = limit.to_i
     else
       nil
     end

@@ -82,7 +82,7 @@ while(user_input != "quit")
     when "limit"
       print_screen("Choose a limit for number of lends:")
       user_input_limit = gets.chomp
-      if library.limit(user_input_limit)
+      if library.change_lend_limit(user_input_limit)
         print_screen("SUCCESS: Limit changed")
       else
         print_screen("ERROR: Limit invalid")
