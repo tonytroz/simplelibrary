@@ -32,6 +32,7 @@ username = gets.chomp
 print_screen("Enter Password:")
 password = gets.chomp
 user = library.login(username, password)
+puts user
 # Check for valid user
 if user.nil?
   print_screen("ERROR: Invalid login")
@@ -49,7 +50,7 @@ while(user_input != "quit")
         puts b.isbn
       end
       user_input_book = gets.chomp
-      if library.checkin(user_input_book)
+      if library.check_in(user_input_book)
         print_screen("SUCCESS: Book checked in")
       else
         print_screen("ERROR: Book not found")
@@ -60,13 +61,8 @@ while(user_input != "quit")
         puts b.isbn + "|" + b.author + "|" + b.name
       end
       user_input_book = gets.chomp
-      if library.checkout(user_input_book)
-        print_screen("SUCCESS: Book checked out")
-      else
-        print_screen("ERROR: Book not found")
-      end
+      print_screen(library.check_out(user_input_book))
     when "lend"
-      # Verify user has not hit lend limit.
       print_screen("Choose a Book to Lend by ISBN:")
       user.books.each do |b|
         puts b.isbn
@@ -77,13 +73,9 @@ while(user_input != "quit")
         puts u.username
       end
       user_input_user = gets.chomp
-      if library.lend(user_input_user, user_input_book)
-        print_screen("SUCCESS: Book lent to user")
-      else
-        print_screen("ERROR: Book/User not found")
-      end
+      print_screen(library.lend(user_input_user, user_input_book))
     when "limit"
-      print_screen("Choose a Book to Lend by Username:")
+      print_screen("Choose a limit for number of lends:")
       user_input_limit = gets.chomp
       if library.limit(user_input_limit)
         print_screen("SUCCESS: Limit changed")

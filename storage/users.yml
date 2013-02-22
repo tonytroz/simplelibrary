@@ -1,0 +1,26 @@
+---
+- !ruby/object:User
+  username: username1
+  password: password1
+  lendlimit: 1
+  books: []
+- !ruby/object:User
+  username: username2
+  password: password2
+  lendlimit: 2
+  books: []
+- !ruby/object:User
+  username: username3
+  password: password3
+  lendlimit: 3
+  books: []
+- !ruby/object:User
+  username: username4
+  password: password4
+  lendlimit: 4
+  books: []
+- !ruby/object:User
+  username: username5
+  password: password5
+  lendlimit: 5
+  books: []
