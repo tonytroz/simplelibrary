@@ -1,7 +1,7 @@
 class User
   attr_accessor :username, :password, :lendlimit, :books
 
-  # Initializes book values
+  # Initializes user values
   def initialize(username, password, lendlimit)
     @username = username
     @password = password

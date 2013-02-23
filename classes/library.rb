@@ -24,11 +24,8 @@ class Library
   # Verifies user credentials and sets current user
   def login(username, password)
     user = User.find_by_username(username)
-    if user.nil? || user.password != password
-       return nil
-    else
-      @current_user = user
-      return user
+    unless user.nil? || user.password != password
+       @current_user = user
     end
   end
 

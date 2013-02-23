@@ -15,7 +15,7 @@ def print_screen(text)
   puts "=================================================="
 end
 
-# Prints user commmands
+# Prints user commmands to screen
 def usage
   puts "=================================================="
   puts "== Commands:                                    =="
@@ -32,9 +32,9 @@ print_screen("Enter Username:")
 username = gets.chomp
 print_screen("Enter Password:")
 password = gets.chomp
-user = library.login(username, password)
+library.login(username, password)
 # Check for valid user
-if user.nil?
+if library.current_user.nil?
   print_screen("ERROR: Invalid login")
   exit 1
 end
@@ -42,12 +42,12 @@ usage()
 # Handle user commands
 user_input = nil
 while(user_input != "quit")
-    user_input_menu = gets.chomp
-    case user_input_menu
+    user_input = gets.chomp
+    case user_input
     # Allows user to check in books
     when "checkin"
       print_screen("Choose a Book to Check In by ISBN:")
-      user.books.each do |b|
+      library.current_user.books.each do |b|
         puts b.isbn
       end
       user_input_book = gets.chomp
@@ -67,7 +67,7 @@ while(user_input != "quit")
     # Allows user to lend a book to another user
     when "lend"
       print_screen("Choose a Book to Lend by ISBN:")
-      user.books.each do |b|
+      library.current_user.books.each do |b|
         puts b.isbn
       end
       user_input_book = gets.chomp
