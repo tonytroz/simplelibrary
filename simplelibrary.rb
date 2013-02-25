@@ -29,9 +29,9 @@ library = Library.new
 print_screen("Welcome to the Simple Library Account System")
 # User login
 print_screen("Enter Username:")
-username = gets.chomp
+username = gets.chomp()
 print_screen("Enter Password:")
-password = gets.chomp
+password = gets.chomp()
 library.login(username, password)
 # Check for valid user
 if library.current_user.nil?
@@ -42,7 +42,7 @@ usage()
 # Handle user commands
 user_input = nil
 while(user_input != "quit")
-    user_input = gets.chomp
+    user_input = gets.chomp()
     case user_input
     # Allows user to check in books
     when "checkin"
@@ -50,7 +50,7 @@ while(user_input != "quit")
       library.current_user.books.each do |b|
         puts b.isbn
       end
-      user_input_book = gets.chomp
+      user_input_book = gets.chomp()
       if library.check_in(user_input_book)
         print_screen("SUCCESS: Book checked in")
       else
@@ -62,7 +62,7 @@ while(user_input != "quit")
       library.available_books.each do |b|
         puts b.isbn + "|" + b.author + "|" + b.name
       end
-      user_input_book = gets.chomp
+      user_input_book = gets.chomp()
       print_screen(library.check_out(user_input_book))
     # Allows user to lend a book to another user
     when "lend"
@@ -70,17 +70,17 @@ while(user_input != "quit")
       library.current_user.books.each do |b|
         puts b.isbn
       end
-      user_input_book = gets.chomp
+      user_input_book = gets.chomp()
       print_screen("Choose a Book to Lend by Username:")
       library.users.each do |u|
         puts u.username
       end
-      user_input_user = gets.chomp
+      user_input_user = gets.chomp()
       print_screen(library.lend(user_input_user, user_input_book))
     # Allows user to change max number of lends
     when "limit"
       print_screen("Choose a limit for number of lends:")
-      user_input_limit = gets.chomp
+      user_input_limit = gets.chomp()
       if library.change_lend_limit(user_input_limit)
         print_screen("SUCCESS: Limit changed")
       else

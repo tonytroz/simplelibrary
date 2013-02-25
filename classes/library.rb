@@ -107,7 +107,7 @@ class Library
       end
       @current_user.delete(found_book)
       found_user.push(found_book)
-      return "SUCCESS: Book lent to " + username
+      return "SUCCESS: Book lent to #{username}"
     end
   end
 
