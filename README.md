@@ -12,10 +12,11 @@ A simple library account system.
 # Usage
     ruby simplelibrary.rb
 
-User commands:
+### User commands:
     checkin checkout lend limit quit help cancel
 
 # Configuration
-To reset database to default:
+### Reset database to default:
     ruby reset_data.rb
-    
+
+©2013 Tony Trozzo
