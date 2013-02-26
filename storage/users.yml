@@ -2,13 +2,29 @@
 - !ruby/object:User
   username: username1
   password: password1
-  lendlimit: 1
-  books: []
+  lendlimit: 2
+  books:
+  - !ruby/object:Book
+    isbn: '3'
+    name: The Catcher In the Rye
+    author: J.D. Salinger
+    availability: 2
+    format: EPUB
+    genre: Fiction
+    language: Italian
 - !ruby/object:User
   username: username2
   password: password2
   lendlimit: 2
-  books: []
+  books:
+  - !ruby/object:Book
+    isbn: '2'
+    name: The Lord of the Rings
+    author: J.R.R. Tolkien
+    availability: 1
+    format: PDF
+    genre: Fantasy
+    language: Spanish
 - !ruby/object:User
   username: username3
   password: password3

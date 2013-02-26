@@ -1,17 +1,9 @@
 ---
 - !ruby/object:Book
-  isbn: '1'
-  name: A Tale of Two Cities
-  author: Charles Dickens
-  availability: 1
-  format: Hardback
-  genre: Historical
-  language: English
-- !ruby/object:Book
   isbn: '2'
   name: The Lord of the Rings
   author: J.R.R. Tolkien
-  availability: 2
+  availability: 1
   format: PDF
   genre: Fantasy
   language: Spanish
@@ -19,7 +11,7 @@
   isbn: '3'
   name: The Catcher In the Rye
   author: J.D. Salinger
-  availability: 3
+  availability: 2
   format: EPUB
   genre: Fiction
   language: Italian
@@ -31,3 +23,11 @@
   format: Paperback
   genre: Childrens
   language: German
+- !ruby/object:Book
+  isbn: '5'
+  name: The Da Vinci Code
+  author: Dan Brown
+  availability: 5
+  format: Kindle
+  genre: Mystery
+  language: Russian

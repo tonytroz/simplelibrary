@@ -8,20 +8,19 @@ require_relative "./classes/library"
 require "yaml"
 
 # Formats user reponses and prints to screen
-# Text must be less than 45 characters
 def print_screen(text)
-  puts "=================================================="
-  puts "== " + text + " " * (44-text.length) + " =="
-  puts "=================================================="
+  puts("==================================================")
+  puts("== " + text + " " * (44-text.length) + " ==")
+  puts("==================================================")
 end
 
 # Prints user commmands to screen
 def usage
-  puts "=================================================="
-  puts "== Commands:                                    =="
-  puts "=================================================="
-  puts "== checkin checkout lend limit quit help        =="
-  puts "=================================================="
+  puts("==================================================")
+  puts("== Commands:                                    ==")
+  puts("==================================================")
+  puts("== checkin checkout lend limit quit help cancel ==")
+  puts("==================================================")
 end
 
 # Create library instance
@@ -46,30 +45,39 @@ while(user_input != "quit")
     case user_input
     # Allows user to check in books
     when "checkin"
+      if library.current_user.books.length == 0
+        print_screen("ERROR: No books checked out")
+      end
       print_screen("Choose a Book to Check In by ISBN:")
       library.current_user.books.each do |b|
-        puts b.isbn + "|" + b.author + "|" + b.name
+        puts b.isbn + "|" + b.author + "|" + b.name + "|" + b.availability.to_s + "|" + b.format + "|" + b.genre + "|" + b.language
       end
       user_input_book = gets.chomp
       print_screen(library.check_in(user_input_book))
     # Allows user to check out books
     when "checkout"
       print_screen("Choose a Book to Check Out by ISBN:")
+      puts("ISBN|Author|Title|Availability|Format|Genre|Language")
+      puts("----------------------------------------------------")
       library.available_books.each do |b|
-        puts b.isbn + "|" + b.author + "|" + b.name
+        puts b.isbn + "|" + b.author + "|" + b.name + "|" + b.availability.to_s + "|" + b.format + "|" + b.genre + "|" + b.language
       end
       user_input_book = gets.chomp
       print_screen(library.check_out(user_input_book))
     # Allows user to lend a book to another user
     when "lend"
       print_screen("Choose a Book to Lend by ISBN:")
+      puts("ISBN|Author|Title|Availability|Format|Genre|Language")
+      puts("----------------------------------------------------")
       library.current_user.books.each do |b|
         puts b.isbn + "|" + b.author + "|" + b.name
       end
       user_input_book = gets.chomp
-      print_screen("Choose a Book to Lend by Username:")
+      print_screen("Choose a User to Lend to by Username:")
       library.users.each do |u|
-        puts u.username
+        unless library.current_user.username == u.username
+          puts u.username
+        end
       end
       user_input_user = gets.chomp
       print_screen(library.lend(user_input_user, user_input_book))
