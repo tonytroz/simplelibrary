@@ -13,28 +13,28 @@ describe User do
     end
   end
 
-  describe "#username" do
+  describe "username" do
     it "returns correct username" do
       @user.username.should == "username"
     end
   end
-  describe "#password" do
+  describe "password" do
     it "returns correct password" do
       @user.password.should == "password"
     end
   end
-  describe "#lendlimit" do
+  describe "lendlimit" do
     it "returns correct lendlimit" do
       @user.lendlimit.should == 1
     end
   end
-  describe "#books" do
+  describe "books" do
     it "returns empty books array" do
       @user.books.should == []
     end
   end
 
-  describe "#find_by_username" do
+  describe :find_by_username do
     it "returns user when username exists" do
       @found_user.should be_an_instance_of User
     end

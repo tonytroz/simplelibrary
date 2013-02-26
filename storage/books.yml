@@ -31,11 +31,3 @@
   format: Paperback
   genre: Childrens
   language: German
-- !ruby/object:Book
-  isbn: '5'
-  name: The Da Vinci Code
-  author: Dan Brown
-  availability: 5
-  format: Kindle
-  genre: Mystery
-  language: Russian

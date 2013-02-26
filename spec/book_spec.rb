@@ -11,37 +11,37 @@ describe Book do
     end
   end
 
-  describe "#isbn" do
+  describe "isbn" do
     it "returns correct isbn" do
       @book.isbn.should == "isbn"
     end
   end
-  describe "#name" do
+  describe "name" do
     it "returns correct name" do
       @book.name.should == "name"
     end
   end
-  describe "#author" do
+  describe "author" do
     it "returns correct author" do
       @book.author.should == "author"
     end
   end
-  describe "#availability" do
+  describe "availability" do
     it "returns correct availability" do
       @book.availability.should == :availability
     end
   end
-  describe "#format" do
+  describe "format" do
     it "returns correct format" do
       @book.format.should == :format
     end
   end
-  describe "#genre" do
+  describe "genre" do
     it "returns correct genre" do
       @book.genre.should == :genre
     end
   end
-  describe "#language" do
+  describe "language" do
     it "returns correct language" do
       @book.language.should == :language
     end

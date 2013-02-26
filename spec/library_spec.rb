@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'digest/sha1'
 
 describe Library do
   before :all do
@@ -24,8 +25,6 @@ describe Library do
       YAML.dump(users,f)
       f.close
     end
-  end
-  before :each do
     @library = Library.new
   end
 
@@ -38,6 +37,56 @@ describe Library do
     end
     it "has a checkout limit of 3" do
       @library.checkout_limit.should == 3
+    end
+  end
+ 
+  describe :login do
+    before :each do
+      @library.login("username1", "password1")
+    end
+
+    it "should should set current user" do 
+      @library.current_user.username.should == "username1"
+      @library.current_user.password.should == "password1"
+    end
+
+    describe :check_out do
+
+    end
+
+    describe :check_in do
+
+    end
+
+    describe :lend do
+
+    end
+
+    describe :change_lend_limit do
+      it "returns SUCCESS if limit is valid" do
+        @library.change_lend_limit(1).should == "SUCCESS: Limit changed to 1"
+      end
+      it "returns ERROR if limit is less than 1" do
+        @library.change_lend_limit(-1).should == "ERROR: Limit invalid"
+      end
+      it "returns ERROR if limit is greater than 10" do
+        @library.change_lend_limit(11).should == "ERROR: Limit invalid"
+      end
+    end
+
+     describe :save do
+      it "should modify books file" do
+        prev_sha1 = Digest::SHA1.hexdigest(File.read("./storage/books.yml"))
+        @library.available_books.pop
+        @library.save
+        Digest::SHA1.hexdigest(File.read("./storage/books.yml")).should_not == prev_sha1
+      end
+      it "should modify users file" do
+        prev_sha1 = Digest::SHA1.hexdigest(File.read("./storage/users.yml"))
+        @library.users.pop
+        @library.save
+        Digest::SHA1.hexdigest(File.read("./storage/users.yml")).should_not == prev_sha1
+      end
     end
   end
 end

@@ -88,7 +88,7 @@ class Library
   def lend(isbn, username)
     # Verify lend limit has not been reached
     if @current_user.books.length == @current_user.lendlimit
-      puts "ERROR: Lend limit reached."
+      puts "ERROR: Lend limit reached"
     end
     found_book = nil
     @current_user.books.each do |b|
@@ -103,7 +103,7 @@ class Library
     else
       # Verify lendee isn't at checkout limit
       if found_user.books.length == @checkout_limit
-        return "ERROR: " + username + " is at checkout limit."
+        return "ERROR: " + username + " is at checkout limit"
       end
       @current_user.delete(found_book)
       found_user.push(found_book)
@@ -113,10 +113,11 @@ class Library
 
   # Changes current user's lend limit
   def change_lend_limit(limit)
-    if limit.to_i > 0
+    if limit.to_i > 0 && limit.to_i < 11
       @current_user.lendlimit = limit.to_i
+      return "SUCCESS: Limit changed to #{limit}"
     else
-      nil
+      return "ERROR: Limit invalid"
     end
   end
 end

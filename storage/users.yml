@@ -19,8 +19,3 @@
   password: password4
   lendlimit: 4
   books: []
-- !ruby/object:User
-  username: username5
-  password: password5
-  lendlimit: 5
-  books: []
