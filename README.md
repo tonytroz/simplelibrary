@@ -10,13 +10,17 @@ A simple library account system.
 - User can set limit on book lending.
 
 # Usage
-    ruby simplelibrary.rb
+```ruby
+ruby simplelibrary.rb
+```
 
 ### User commands:
     checkin checkout lend limit quit help cancel
 
 # Configuration
 ### Reset database to default:
-    ruby reset_data.rb
+```ruby
+ruby reset_data.rb
+```
 
 ©2013 Tony Trozzo
